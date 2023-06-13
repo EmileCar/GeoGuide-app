@@ -1,4 +1,12 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using GeoGuide.Domain;
+using GeoGuide.Repositories;
+using GeoGuide.Repositories.Interfaces;
+using GeoGuide.Services;
+using GeoGuide.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
+using MongoDB.Driver.Core.Configuration;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,10 +35,19 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+
+// Lees de connectiestring uit de configuratie
+var connectionString = builder.Configuration.GetConnectionString("MongoDBConnection");
+
+// Registreer de MongoDB-client als een singleton service
+builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
+
 // add Automapper
 //your code
 //DI
-// your code
+builder.Services.AddTransient<IDAO<Country>, CountryDAO>();
+builder.Services.AddTransient<IService<Country>, CountryService>();
 
 var app = builder.Build();
 
