@@ -1,29 +1,48 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using ThirdParty.Json.LitJson;
+using Newtonsoft.Json;
 
 namespace GeoGuide.Domain
 {
     [BsonIgnoreExtraElements]
     public class Country
     {
+        // Country specific fields
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = String.Empty;
+        [BsonRepresentation(BsonType.String)]
+        public string CountryCode { get; set; } = String.Empty;
+
         [BsonElement("name")]
-        public string Name { get; set; }
+        [BsonIgnoreIfNull]
+        public string Name { get; set; } = String.Empty;
+
         [BsonElement("population")]
-        public int Population { get; set; }
+        [BsonIgnoreIfDefault]
+        public int? Population { get; set; }
+
         [BsonElement("area")]
-        public int Area { get; set; }
+        [BsonIgnoreIfDefault]
+        public int? Area { get; set; }
+
+        [BsonElement("independent")]
+        [BsonIgnoreIfDefault]
+        public bool? Independent { get; set; }
+
+        [BsonElement("capital")]
+        [BsonIgnoreIfNull]
+        public string Capital { get; set; }
+
         [BsonElement("currency")]
         public string Currency { get; set; }
-        [BsonElement("languages")]
-        public List<Language> Languages { get; set; }
-        [BsonElement("region")]
-        public Region Region { get; set; }
-        [BsonElement("flag")]
-        public string Flag { get; set; }
-        [BsonElement("description")]
-        public string Description { get; set; }
+
+        // Country options
+        [BsonElement("drivingSide")]
+        [BsonIgnoreIfNull]
+        public DrivingSide? DrivingSide { get; set; }
+        [BsonElement("coverage")]
+        [BsonIgnoreIfNull]
+        public Coverage? Coverage { get; set; }
+
     }
 }

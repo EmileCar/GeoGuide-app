@@ -12,7 +12,10 @@ using System;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -48,6 +51,7 @@ builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
 //DI
 builder.Services.AddTransient<IDAO<Country>, CountryDAO>();
 builder.Services.AddTransient<IService<Country>, CountryService>();
+
 
 var app = builder.Build();
 

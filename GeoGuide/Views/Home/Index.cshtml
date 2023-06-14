@@ -2,7 +2,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="maxDimensions layered-grid">
+	<section class="section--60 section__cardstyle section__centre">
+		<h2 class="title">Lost in Geogssr? <br>Find your way using this site</h2>
+		<!-- <div class="ignoreFlex">
+			<div class="map__container">
+				<div id="svgMap"></div>
+				<script type="module" src="js/mapscript.js"></script>
+			</div>
+		</div>
+		-->
+		<p>You can use one of these choices to guide your search</p>
+		<ul class="choices">
+			<a asp-controller="Country" asp-action="Index">
+			<li class="choice">
+				<img src="~/img/choices/countryLogo.svg" height="80">
+				<h3 class="">Search by country</h3>
+			</li>
+			</a>
+			<li class="choice">
+				<img src="~/img/choices/hintsLogo.svg" height="80">
+				<h3 class="">Search by hints</h3>
+			</li>
+			<li class="choice">
+				<img src="~/img/choices/mapLogo.svg" height="80">
+				<h3 class="">Interactive map</h3>
+			</li>
+		</ul>
+	</section>
 </div>

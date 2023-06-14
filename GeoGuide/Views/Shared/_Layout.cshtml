@@ -4,46 +4,57 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GeoGuide</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GeoGuide.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GeoGuide</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<header class="header">
+		<div class="header__wrapper">
+			<div>
+				<h1 class="header__title hidden no-display">Geoguide</h1>
+				<a asp-controller="Home" asp-action="Index" class="header__logo"><img src="~/img/logo.svg" alt="geoguide logo" width="156" height="64"></a>
+			</div>
+			<input type="checkbox" id="nav-toggle" class="nav-toggle hidden no-display">
+			<nav class="navbar">
+				<ul class="menu__items">
+					<li class="menu__item"><a class="item__link" asp-controller="Home" asp-action="Index">Home</a></li>
+					<li class="menu__item"><a class="item__link" asp-controller="Country" asp-action="Index">Countries</a></li>
+					<li class="menu__item"><a class="item__link" asp-controller="Home" asp-action="Hints">Hints</a></li>
+					@*<li class="menu__item dropdown">
+						<a class="item__link" href="?page=media">Media</a>
+						<ul class="dropdown-content">
+							<li class="dropdown__menu__item"><a href="?page=media&mediaItem=foto" class="dropdown__item__link">Foto</a></li>
+							<li class="dropdown__menu__item"><a href="?page=media&mediaItem=video" class="dropdown__item__link">Video</a></li>
+							<li class="dropdown__menu__item"><a href="?page=media&mediaItem=audio" class="dropdown__item__link">Audio</a></li>
+						</ul>
+					</li>*@
+				</ul>
+			</nav>
+			<label for="nav-toggle" class="toggle-button">
+				<span class="toggle-button-bar"></span>
+				<span class="toggle-button-bar"></span>
+				<span class="toggle-button-bar"></span>
+			</label>
+		</div>
+	</header>
+	<div class="container" id="container">
+		<main>
+			@RenderBody()
+		</main>
+		<aside class="aside-Nav" id="asideNav">
+			<p>content</p>
+			<p>zrgozrgoz opzrgop hrzpogp ozh gopzqhepog oz</p>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - GeoGuide - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+		</aside>
+	</div>
+	<script src="~/js/asideNav.js"></script>
+	<footer class="footer">
+		<div class="footer__wrapper">
+		</div>
+	</footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

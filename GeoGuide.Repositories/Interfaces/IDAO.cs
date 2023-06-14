@@ -13,5 +13,7 @@ namespace GeoGuide.Repositories.Interfaces
         Task DeleteAsync(string id);
         Task UpdateAsync(string id, T entity);
         Task<T> FindByIdAsync(string id);
+        Task<int> GetCountAsync();
+        Task<List<T>> GetPagedAsync(int skip, int pageSize);
     }
 }

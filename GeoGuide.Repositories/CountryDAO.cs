@@ -35,7 +35,22 @@ namespace GeoGuide.Repositories
             return await _countryCollection.Find(country => true).ToListAsync();
         }
 
-        public Task UpdateAsync(string id, Country entity)
+		public async Task<int> GetCountAsync()
+		{
+			var count = await _countryCollection.CountDocumentsAsync(Builders<Country>.Filter.Empty);
+			return (int)count;
+		}
+
+		public async Task<List<Country>> GetPagedAsync(int skip, int pageSize)
+		{
+			var countries = await _countryCollection.Find(Builders<Country>.Filter.Empty)
+				.Skip(skip)
+				.Limit(pageSize)
+				.ToListAsync();
+			return countries;
+		}
+
+		public Task UpdateAsync(string id, Country entity)
         {
             throw new NotImplementedException();
         }
