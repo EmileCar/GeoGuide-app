@@ -1,0 +1,97 @@
+﻿@model GeoGuide.Domain.Country
+
+@{
+    ViewData["Title"] = "Detail";
+}
+@functions {
+	public string NiceNumber(decimal n)
+	{
+		if (n != 0)
+		{
+			n = (0 + decimal.Parse(n.ToString().Replace(",", "")));
+
+			// Is this a number?
+			if (!decimal.TryParse(n.ToString(), out _)) return null;
+
+			// Now filter it
+			if (n > 1000000000) return $"{Math.Round((n / 1000000000), 2):N2} billion";
+			else if (n > 1000000) return $"{Math.Round((n / 1000000), 2):N2} million";
+			else if (n > 1000) return $"{Math.Round((n / 1000), 2):N2} thousand";
+
+			return n.ToString("N0");
+		}
+		else
+		{
+			return "unknown";
+		}
+	}
+}
+<section class="section--60 section__cardstyle section__centre section__countries">
+	<h2 class="title section__countries--title"><?= $country->name;?></h2>
+	<div class="countrydetail__container">
+		<div class="countrydetail countrydetail__generalInfo">
+			<a href="?page=countries&region=<?= $country->region->id;?>" class="generalInfo__item">
+				<p class="generalInfo__item--title">Region</p>
+				<p class="generalInfo__item--value"><?= $country->region->name;?></p>
+			</a>
+			<a href="?page=countries&" class="generalInfo__item">
+				<p class="generalInfo__item--title">Capital</p>
+				<p class="generalInfo__item--value"><?= $country->capital;?></p>
+			</a>
+			<a href="?page=countries&coverage=<?= $country->coverage->id;?>" class="generalInfo__item">
+				<p class="generalInfo__item--title">Coverage</p>
+				<p class="generalInfo__item--value"><?= $country->coverage->keyword;?></p>
+			</a>
+		</div>
+		<div class="countrydetail countrydetail__second">
+			<div class="countrydetail__second--left">
+				<p><strong>Population</strong>: <?= nice_number($country->population);?></p>
+				<p><strong>Independent</strong>: <?= $country->independent ? "yes" : "no";?></p>
+				<p><strong>Currency</strong>: <?= $country->currency?></p>
+				<p><strong>Domain</strong>: <?= $country->id;?></p>
+				<p><strong>Driving side</strong>: <?= $country->id;?></p>
+
+
+				<div class="countrydetail__item tableOfContents__container">
+					<h3 class="countrydetail__item--item">Table of Contents</h3>
+					<ol class="tableOfContents">
+					</ol>
+				</div>
+			</div>
+			<div class="countrydetail__second--right">
+				<img src="assets/img/flags/<?= $country->id;?>.svg" width="160" class="countrydetail--flag">
+			</div>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Architecture</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Bollards</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Poles</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">License Plates</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Road lines</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Post box</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Scenery</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Sidewalks</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Signs</h3>
+		</div>
+		<div class="countrydetail__item">
+			<h3 class="countrydetail__item--item toc-item">Traffic lights</h3>
+		</div>
+	</div>
+</section>
+<script src="js/tableofcontents.js"></script>

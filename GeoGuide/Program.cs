@@ -51,7 +51,10 @@ builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
 //DI
 builder.Services.AddTransient<IDAO<Country>, CountryDAO>();
 builder.Services.AddTransient<IService<Country>, CountryService>();
-
+builder.Services.AddTransient<IDAO<Region>, RegionDAO>();
+builder.Services.AddTransient<IService<Region>, RegionService>();
+builder.Services.AddTransient<ApiDAO>();
+builder.Services.AddTransient<ApiService>();
 
 var app = builder.Build();
 

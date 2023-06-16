@@ -25,15 +25,17 @@ namespace GeoGuide.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Country> FindByIdAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<Country> FindByIdAsync(string id)
+		{
+			var country = await _countryCollection.Find(country => country.CountryCode == id).FirstOrDefaultAsync();
+			return country;
+		}
 
-        public async Task<List<Country>> GetAllAsync()
-        {
-            return await _countryCollection.Find(country => true).ToListAsync();
-        }
+
+		public async Task<List<Country>> GetAllAsync()
+		{
+			throw new NotImplementedException();
+		}
 
 		public async Task<int> GetCountAsync()
 		{

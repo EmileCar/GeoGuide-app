@@ -24,9 +24,9 @@ namespace GeoGuide.Services
             throw new NotImplementedException();
         }
 
-        public Task<Country> FindByIdAsync(string id)
+        public async Task<Country> FindByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _countryDao.FindByIdAsync(id);
         }
 
         public async Task<List<Country>> GetAllAsync()

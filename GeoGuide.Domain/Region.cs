@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace GeoGuide.Domain
 {
-    public class Region
+	[BsonIgnoreExtraElements]
+	public class Region
     {
-        public string Name { get; set; }
+		[BsonElement("name")]
+		public string Name { get; set; }
         [BsonId]
-        public ObjectId Id { get; set; }
+		[BsonRepresentation(BsonType.String)]
+		public string Id { get; set; } = string.Empty;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GeoGuide.Domain;
+using GeoGuide.Services;
 using GeoGuide.Services.Interfaces;
 using GeoGuide.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,29 +10,28 @@ namespace GeoGuide.Controllers.API
     [ApiController]
     public class ApiController : Controller
     {
-        private readonly IService<Country> _countryService;
+        private readonly ApiService _apiService;
 
-        public ApiController(IService<Country> countryService)
+        public ApiController(ApiService apiService)
         {
-            _countryService = countryService;
+			_apiService = apiService;
         }
 		// GET: api/
 		[HttpGet("getAllCountries", Name = "getAllCountries")]
-		public async Task<ActionResult<IEnumerable<Country>>> GetAllCountries()
+		public async Task<ActionResult<IEnumerable<CountrySearchResult>>> GetAllCountries()
         {
             try
             {
-                return await _countryService.GetAllAsync();
+                return await _apiService.GetCountrySearchResultsAsync();
             }
             catch (Exception ex)
-
             {
                 return StatusCode(500, "Internal server error");
             }
         }
 
 		[HttpGet("getCountriesByForm", Name = "getCountriesByForm")]
-		public async Task<ActionResult<IEnumerable<Country>>> GetCountriesWithForm(CountriesVM countriesVM)
+		public async Task<ActionResult<IEnumerable<Country>>> GetCountriesWithForm(CountrySearchVM countriesVM)
 		{
             return View(countriesVM);
 		}

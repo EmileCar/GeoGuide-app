@@ -12,41 +12,33 @@ namespace GeoGuide.Controllers
 	{
 		private readonly ILogger<CountryController> _logger;
 		private readonly IService<Country> _countryService;
+		private readonly IService<Region> _regionService;
 
-		public CountryController(ILogger<CountryController> logger, IService<Country> countryService)
+
+		public CountryController(ILogger<CountryController> logger, IService<Country> countryService, IService<Region> regionService)
 		{
 			_logger = logger;
 			_countryService = countryService;
+			_regionService = regionService;
 		}
 
-		public async Task<IActionResult> Index(int pagenumber = 1)
+		public async Task<IActionResult> Index()
 		{
-			try
+			var countrySearchVM = new CountrySearchVM();
+			countrySearchVM.Regions = await _regionService.GetAllAsync();
+			return View(countrySearchVM);
+		}
+
+		public async Task<IActionResult> Detail(string countryCode)
+		{
+			var country = await _countryService.FindByIdAsync(countryCode);
+			
+			if (country == null)
 			{
-				_logger.LogInformation("Fetching all the Countries from the storage");
-
-				int totalCountriesCount = await _countryService.GetCountAsync();
-
-				int pageSize = 25; 
-				int totalPages = (int)Math.Ceiling((double)totalCountriesCount / pageSize);
-				int skip = (pagenumber - 1) * pageSize;
-
-				var countries = await _countryService.GetPagedAsync(skip, pageSize);
-
-				var countriesVM = new CountriesVM
-				{
-					Countries = countries,
-					CurrentPage = pagenumber,
-					PageSize= pageSize,
-					TotalPages = totalPages
-				};
-				return View(countriesVM);
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError($"Something went wrong: {ex}");
 				return NotFound();
 			}
+
+			return View(country);
 		}
 
 

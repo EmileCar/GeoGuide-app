@@ -5,10 +5,10 @@ using System.Xml.Linq;
 
 namespace GeoGuide.ViewModels
 {
-	public class CountriesVM
+	public class CountrySearchVM
 	{
 		[Required]
-		public List<Country> Countries { get; set; }
+		public List<Region> Regions { get; set; }
 		public string Keyword { get; set; } = string.Empty;
 		public int CurrentPage { get; set; }
 		public int TotalPages { get; set; }

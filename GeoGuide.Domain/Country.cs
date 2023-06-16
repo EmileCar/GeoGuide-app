@@ -43,6 +43,8 @@ namespace GeoGuide.Domain
         [BsonElement("coverage")]
         [BsonIgnoreIfNull]
         public Coverage? Coverage { get; set; }
-
-    }
+		[BsonElement("region")]
+		[BsonIgnoreIfNull]
+		public Region? Region { get; set; }
+	}
 }
