@@ -1,0 +1,82 @@
+﻿@model GeoGuide.ViewModels.CountryEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<section class="section--60 section__cardstyle section__countries">
+    <h1 class="title section-centre">Edit @Model.Country.Name</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" class="form-standard">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Country.CountryCode" class="control-label"></label>
+                    <input class="inherit-font-style" asp-for="Country.CountryCode" class="form-control" />
+                    <span asp-validation-for="Country.CountryCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country.Name" class="control-label"></label>
+                    <input class="inherit-font-style" asp-for="Country.Name" class="form-control" />
+                    <span asp-validation-for="Country.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country.Population" class="control-label"></label>
+                    <input class="inherit-font-style" asp-for="Country.Population" class="form-control" />
+                    <span asp-validation-for="Country.Population" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country.Area" class="control-label"></label>
+                    <input class="inherit-font-style" class="inherit-font-style" asp-for="Country.Area" class="form-control" />
+                    <span asp-validation-for="Country.Area" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country.Independent" class="control-label"></label>
+                    <input class="inherit-font-style" class="inherit-font-style" asp-for="Country.Independent" class="form-control" />
+                    <span asp-validation-for="Country.Independent" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Country.Capital" class="control-label"></label>
+                    <input class="inherit-font-style" asp-for="Country.Capital" class="form-control" />
+                    <span asp-validation-for="Country.Capital" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country.Currency" class="control-label"></label>
+                    <input class="inherit-font-style" asp-for="Country.Currency" class="form-control" />
+                    <span asp-validation-for="Country.Currency" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SelectedRegion" class="control-label"></label>
+                    <select class="inherit-font-style" asp-for="SelectedRegion" class="form-control" asp-items="@Model.Regions">
+                        <option value="">-- Select Region --</option>
+                    </select>
+                    <span asp-validation-for="SelectedRegion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SelectedCoverageType" class="control-label"></label>
+                    <span asp-validation-for="SelectedCoverageType" class="text-danger"></span>
+                    <select class="inherit-font-style" asp-for="SelectedCoverageType" class="form-control" asp-items="@Model.CoverageTypes">
+                        <option value="">-- Select Coverage Type --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</section>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -2,6 +2,8 @@
 using MongoDB.Bson;
 using ThirdParty.Json.LitJson;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace GeoGuide.Domain
 {
@@ -11,10 +13,13 @@ namespace GeoGuide.Domain
         // Country specific fields
         [BsonId]
         [BsonRepresentation(BsonType.String)]
+        [Display(Name = "Country Code")]
         public string CountryCode { get; set; } = String.Empty;
 
         [BsonElement("name")]
         [BsonIgnoreIfNull]
+        [Display(Name = "Name")]
+
         public string Name { get; set; } = String.Empty;
 
         [BsonElement("population")]
@@ -27,7 +32,7 @@ namespace GeoGuide.Domain
 
         [BsonElement("independent")]
         [BsonIgnoreIfDefault]
-        public bool? Independent { get; set; }
+        public bool Independent { get; set; }
 
         [BsonElement("capital")]
         [BsonIgnoreIfNull]
@@ -40,9 +45,9 @@ namespace GeoGuide.Domain
         [BsonElement("drivingSide")]
         [BsonIgnoreIfNull]
         public DrivingSide? DrivingSide { get; set; }
-        [BsonElement("coverage")]
+        [BsonElement("coverageType")]
         [BsonIgnoreIfNull]
-        public Coverage? Coverage { get; set; }
+        public CoverageType? CoverageType { get; set; }
 		[BsonElement("region")]
 		[BsonIgnoreIfNull]
 		public Region? Region { get; set; }

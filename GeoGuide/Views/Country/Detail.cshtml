@@ -6,23 +6,13 @@
     ViewData["Title"] = "Detail";
 }
 
-<pre>@Html.Raw(JsonConvert.SerializeObject(Model, Formatting.Indented))</pre>
 @functions {
-	public string NiceNumber(decimal n)
+	public string NiceNumber(int? n)
 	{
-		if (n != 0)
+		if (n.HasValue)
 		{
-			n = (0 + decimal.Parse(n.ToString().Replace(",", "")));
-
-			// Is this a number?
-			if (!decimal.TryParse(n.ToString(), out _)) return null;
-
-			// Now filter it
-			if (n > 1000000000) return $"{Math.Round((n / 1000000000), 2):N2} billion";
-			else if (n > 1000000) return $"{Math.Round((n / 1000000), 2):N2} million";
-			else if (n > 1000) return $"{Math.Round((n / 1000), 2):N2} thousand";
-
-			return n.ToString("N0");
+			string population = n.Value.ToString("N0");
+			return population.Replace(",", ".");
 		}
 		else
 		{
@@ -31,6 +21,7 @@
 	}
 }
 <section class="section--60 section__cardstyle section__centre section__countries">
+	<a class="button" asp-action="Edit" asp-controller="Country" asp-route-countryCode="@Model.CountryCode"></a>
 	<h2 class="title section__countries--title">@Model.Name</h2>
 	<div class="countrydetail__container">
 		<div class="countrydetail countrydetail__generalInfo">
@@ -49,10 +40,10 @@
 		</div>
 		<div class="countrydetail countrydetail__second">
 			<div class="countrydetail__second--left">
-				<p><strong>Population</strong>: <?= nice_number($country->population);?></p>
-				<p><strong>Independent</strong>: <?= $country->independent ? "yes" : "no";?></p>
-				<p><strong>Currency</strong>: <?= $country->currency?></p>
-				<p><strong>Domain</strong>: <?= $country->id;?></p>
+				<p><strong>Population</strong>: @NiceNumber(Model.Population)</p>
+				<p><strong>Independent</strong>: @(Model.Independent ? "yes" : "no")</p>
+				<p><strong>Currency</strong>: @Model.Currency</p>
+				<p><strong>Domain</strong>: @Model.CountryCode</p>
 				<p><strong>Driving side</strong>: <?= $country->id;?></p>
 
 
@@ -63,7 +54,7 @@
 				</div>
 			</div>
 			<div class="countrydetail__second--right">
-				<img src="assets/img/flags/<?= $country->id;?>.svg" width="160" class="countrydetail--flag">
+				<img src="/img/flags/@(Model.CountryCode).svg" width="160" class="countrydetail--flag">
 			</div>
 		</div>
 		<div class="countrydetail__item">

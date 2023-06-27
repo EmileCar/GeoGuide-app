@@ -107,6 +107,7 @@ em {
 }
 
 
+
 /*   MAIN STYLING   */
 .container{
 	display: flex;
@@ -160,6 +161,54 @@ section{
 	background-color: rgb(233, 233, 233);
 	cursor: pointer;
 }
+.form-standard{
+}
+.form-group {
+	margin: 1rem 0;
+}
+
+/* Custom styling for the checkbox input */
+.custom-checkbox {
+	position: relative;
+	display: inline-block;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-right: 0.5rem;
+	background-color: #fff;
+	border: 2px solid #ccc;
+	border-radius: 0.25rem;
+}
+
+/* Styling for the checkbox input when checked */
+.custom-checkbox form-checked:checked {
+	background-color: #007bff; /* Change this to your desired color */
+	border-color: #007bff;
+}
+
+/* Styling for the checkbox indicator */
+.custom-checkbox .checkbox-indicator {
+	position: absolute;
+	top: 0.125rem;
+	left: 0.125rem;
+	width: 0.75rem;
+	height: 0.75rem;
+	background-color: #fff;
+	border-radius: 0.15rem;
+	display: none;
+}
+
+/* Styling for the checkbox indicator when checked */
+.custom-checkbox form-checked:checked + .checkbox-indicator {
+	display: block;
+}
+
+/* Styling for the label associated with the checkbox */
+.custom-checkbox-label {
+	display: inline-block;
+	margin-bottom: 0;
+}
+
+
 
 
 /*   INDEX SCREEN   */

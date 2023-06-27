@@ -32,10 +32,11 @@ namespace GeoGuide.Repositories
 			throw new NotImplementedException();
 		}
 
-		public Task<Region> FindByIdAsync(string id)
+		public async Task<Region> FindByIdAsync(string id)
 		{
-			throw new NotImplementedException();
-		}
+            var region = await _regionCollection.Find(region => region.Id == id).FirstOrDefaultAsync();
+            return region;
+        }
 
 		public async Task<List<Region>> GetAllAsync()
 		{

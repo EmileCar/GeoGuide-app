@@ -44,9 +44,9 @@ namespace GeoGuide.Services
 			return await _countryDao.GetPagedAsync(skip, pageSize);
 		}
 
-		public Task UpdateAsync(string id, Country entity)
+		public async Task UpdateAsync(string id, Country entity)
         {
-            throw new NotImplementedException();
+            await _countryDao.UpdateAsync(id, entity);
         }
     }
 }

@@ -27,9 +27,9 @@ namespace GeoGuide.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<Region> FindByIdAsync(string id)
+		public async Task<Region> FindByIdAsync(string id)
 		{
-			throw new NotImplementedException();
+			return await _regionDAO.FindByIdAsync(id);
 		}
 
 		public async Task<List<Region>> GetAllAsync()
