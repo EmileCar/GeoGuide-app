@@ -1,8 +1,12 @@
-﻿@model GeoGuide.Domain.Country
+﻿@using System.Text.Json
+@using Newtonsoft.Json
+@model GeoGuide.Domain.Country
 
 @{
     ViewData["Title"] = "Detail";
 }
+
+<pre>@Html.Raw(JsonConvert.SerializeObject(Model, Formatting.Indented))</pre>
 @functions {
 	public string NiceNumber(decimal n)
 	{
@@ -27,16 +31,16 @@
 	}
 }
 <section class="section--60 section__cardstyle section__centre section__countries">
-	<h2 class="title section__countries--title"><?= $country->name;?></h2>
+	<h2 class="title section__countries--title">@Model.Name</h2>
 	<div class="countrydetail__container">
 		<div class="countrydetail countrydetail__generalInfo">
 			<a href="?page=countries&region=<?= $country->region->id;?>" class="generalInfo__item">
 				<p class="generalInfo__item--title">Region</p>
-				<p class="generalInfo__item--value"><?= $country->region->name;?></p>
+				<p class="generalInfo__item--value">@Model.Region?.Name</p>
 			</a>
 			<a href="?page=countries&" class="generalInfo__item">
 				<p class="generalInfo__item--title">Capital</p>
-				<p class="generalInfo__item--value"><?= $country->capital;?></p>
+				<p class="generalInfo__item--value">@Model.Capital</p>
 			</a>
 			<a href="?page=countries&coverage=<?= $country->coverage->id;?>" class="generalInfo__item">
 				<p class="generalInfo__item--title">Coverage</p>

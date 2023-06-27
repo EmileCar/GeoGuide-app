@@ -85,6 +85,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapControllerRoute(
+		name: "country",
+		pattern: "Country/Detail/{countryCode}",
+		defaults: new { controller = "Country", action = "Detail" });
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

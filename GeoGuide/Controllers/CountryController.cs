@@ -3,7 +3,6 @@ using GeoGuide.Models;
 using GeoGuide.Services.Interfaces;
 using GeoGuide.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 
 namespace GeoGuide.Controllers
@@ -32,7 +31,7 @@ namespace GeoGuide.Controllers
 		public async Task<IActionResult> Detail(string countryCode)
 		{
 			var country = await _countryService.FindByIdAsync(countryCode);
-			
+
 			if (country == null)
 			{
 				return NotFound();
